@@ -35,7 +35,7 @@
 				</div>
 				<div class="field">
 					<label for="whatsapp">Nomor WhatsApp</label>
-					<input id="whatsapp" name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel" placeholder="Maksimal 10 digit" pattern="[0-9]{1,10}" maxlength="10" title="Masukkan angka saja, maksimal 10 digit" required>
+					<input id="whatsapp" name="whatsapp" type="text" inputmode="numeric" autocomplete="tel" placeholder="Maksimal 10 digit" pattern="[0-9]{1,10}" maxlength="10" title="Masukkan angka saja, maksimal 10 digit" required>
 				</div>
 				<div class="field">
 					<label for="judul-buku">Judul Buku</label>
@@ -51,5 +51,16 @@
 			</div>
 		</form>
 	</main>
+	<script>
+		const whatsappInput = document.getElementById("whatsapp");
+
+		whatsappInput.addEventListener("input", () => {
+			whatsappInput.setCustomValidity(
+				/^[0-9]{1,10}$/.test(whatsappInput.value)
+					? ""
+					: "Masukkan angka saja, maksimal 10 digit."
+			);
+		});
+	</script>
 </body>
 </html>
