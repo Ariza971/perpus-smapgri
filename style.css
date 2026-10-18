@@ -100,7 +100,8 @@ h1 em {
 	font-weight: 400;
 }
 
-.field input {
+.field input,
+.field select {
 	width: 100%;
 	min-height: 46px;
 	padding: 10px 12px;
@@ -118,7 +119,8 @@ h1 em {
 	color: #9aa49d;
 }
 
-.field input:focus-visible {
+.field input:focus-visible,
+.field select:focus-visible {
 	border-color: var(--green);
 	box-shadow: 0 0 0 3px rgb(36 86 67 / 14%);
 }
