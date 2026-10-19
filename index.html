@@ -15,7 +15,7 @@
 			<p class="eyebrow"><span aria-hidden="true"></span> Perpustakaan SMA PGRI KASIYAN</p>
 			<h1>Form Peminjaman <em>buku</em></h1>
 		</header>
-		<form class="loan-form" action="https://script.google.com/macros/s/AKfycbxyia75cWRmmiPfkpq1ZhBCT1mHTsKA2rkFyZJfJY7qeMLiT1PWo611ElaAvXqKYOfpAw/exec" method="post">
+		<form class="loan-form" action="https://script.google.com/macros/s/AKfycbznbfmjvJwm7FJX7x645nrqZ6T4p0G0bqXNn_qQf-3azhs8qVjhjOjS0VXFWssgiHFyGg/exec" method="post">
 			<div class="form-grid">
 				<div class="field">
 					<label for="nama">Nama Lengkap</label>
@@ -35,7 +35,7 @@
 				</div>
 				<div class="field">
 					<label for="whatsapp">Nomor WhatsApp</label>
-					<input id="whatsapp" name="whatsapp" type="text" inputmode="numeric" autocomplete="tel" placeholder="Maksimal 10 digit" pattern="[0-9]{1,10}" maxlength="10" title="Masukkan angka saja, maksimal 10 digit" required>
+					<input id="whatsapp" name="whatsapp" type="text" inputmode="numeric" autocomplete="tel" placeholder="Maksimal 15 digit" pattern="[0-9]{1,15}" maxlength="15" title="Masukkan angka saja, maksimal 15 digit" required>
 				</div>
 				<div class="field">
 					<label for="judul-buku">Judul Buku</label>
@@ -43,7 +43,7 @@
 				</div>
 				<div class="field field-duration">
 					<label for="lama-meminjam">Lama Meminjam Buku <span>(hari)</span></label>
-					<input id="lama-meminjam" name="lama_meminjam" type="text" inputmode="numeric" pattern="0*[1-9][0-9]*" placeholder="Contoh: 7" title="Masukkan jumlah hari dengan angka bulat lebih dari 0" required>
+					<input id="lama-meminjam" name="lama_meminjam" type="text" inputmode="numeric" pattern="[1-9][0-9]?" maxlength="2" placeholder="Contoh: 7" title="Masukkan jumlah hari dengan angka bulat dari 1 sampai 99" required>
 				</div>
 				<div class="form-actions">
 					<button type="submit">Kirim Form <span aria-hidden="true">&rarr;</span></button>
@@ -57,17 +57,17 @@
 
 		whatsappInput.addEventListener("input", () => {
 			whatsappInput.setCustomValidity(
-				/^[0-9]{1,10}$/.test(whatsappInput.value)
+				/^[0-9]{1,15}$/.test(whatsappInput.value)
 					? ""
-					: "Masukkan angka saja, maksimal 10 digit."
+					: "Masukkan angka saja, maksimal 15 digit."
 			);
 		});
 
 		durationInput.addEventListener("input", () => {
 			durationInput.setCustomValidity(
-				/^(?:0*[1-9][0-9]*)$/.test(durationInput.value)
+				/^[1-9][0-9]?$/.test(durationInput.value)
 					? ""
-					: "Masukkan jumlah hari dengan angka bulat lebih dari 0."
+					: "Masukkan jumlah hari dengan angka bulat dari 1 sampai 99."
 			);
 		});
 	</script>
