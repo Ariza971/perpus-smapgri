@@ -13,7 +13,7 @@
 	<main>
 		<header class="page-heading">
 			<p class="eyebrow"><span aria-hidden="true"></span> Perpustakaan SMA PGRI KASIYAN</p>
-			<h1>Peminjaman <em>buku</em></h1>
+			<h1>Form Peminjaman <em>buku</em></h1>
 		</header>
 		<form class="loan-form" action="https://script.google.com/macros/s/AKfycbxyia75cWRmmiPfkpq1ZhBCT1mHTsKA2rkFyZJfJY7qeMLiT1PWo611ElaAvXqKYOfpAw/exec" method="post">
 			<div class="form-grid">
@@ -43,7 +43,7 @@
 				</div>
 				<div class="field field-duration">
 					<label for="lama-meminjam">Lama Meminjam Buku <span>(hari)</span></label>
-					<input id="lama-meminjam" name="lama_meminjam" type="number" min="1" step="1" placeholder="Contoh: 7" required>
+					<input id="lama-meminjam" name="lama_meminjam" type="text" inputmode="numeric" pattern="0*[1-9][0-9]*" placeholder="Contoh: 7" title="Masukkan jumlah hari dengan angka bulat lebih dari 0" required>
 				</div>
 				<div class="form-actions">
 					<button type="submit">Kirim Form <span aria-hidden="true">&rarr;</span></button>
@@ -53,12 +53,21 @@
 	</main>
 	<script>
 		const whatsappInput = document.getElementById("whatsapp");
+		const durationInput = document.getElementById("lama-meminjam");
 
 		whatsappInput.addEventListener("input", () => {
 			whatsappInput.setCustomValidity(
 				/^[0-9]{1,10}$/.test(whatsappInput.value)
 					? ""
 					: "Masukkan angka saja, maksimal 10 digit."
+			);
+		});
+
+		durationInput.addEventListener("input", () => {
+			durationInput.setCustomValidity(
+				/^(?:0*[1-9][0-9]*)$/.test(durationInput.value)
+					? ""
+					: "Masukkan jumlah hari dengan angka bulat lebih dari 0."
 			);
 		});
 	</script>
