@@ -18,7 +18,7 @@
 			</p>
 			<h1> Peminjaman <em>Buku</em></h1>
 		</header>
-		<form class="loan-form" action="https://script.google.com/macros/s/AKfycbyym-WvY93nk1QHeTlZZQ-1aK48CH1BMltTLlIIgLwmbaoDsfnE-YWG34KpkZjTY1X-/exec" method="post">
+		<form id="perpusForm" class="loan-form">
 			<div class="form-grid">
 				<div class="field">
 					<label for="nama">Nama Lengkap</label>
@@ -53,10 +53,58 @@
 				</div>
 			</div>
 		</form>
+		<section id="successCard" class="success-card" aria-live="polite" tabindex="-1" hidden>
+			<div class="success-icon" aria-hidden="true">🎉</div>
+			<h2>Formulir Terkirim!</h2>
+			<p>Pengiriman selesai. Jika data belum muncul di Sheet, hubungi petugas perpustakaan.</p>
+			<button type="button" id="backBtn">Kembali ke Form</button>
+		</section>
+		<p id="submitError" class="submit-error" role="alert" hidden>
+			Terjadi kesalahan saat mengirim. Periksa koneksi internet lalu coba lagi.
+		</p>
 	</main>
 	<script>
+		const scriptURL = "https://script.google.com/macros/s/AKfycbyym-WvY93nk1QHeTlZZQ-1aK48CH1BMltTLlIIgLwmbaoDsfnE-YWG34KpkZjTY1X-/exec";
+		const form = document.getElementById("perpusForm");
+		const successCard = document.getElementById("successCard");
+		const backBtn = document.getElementById("backBtn");
+		const submitError = document.getElementById("submitError");
+		const submitButton = form.querySelector('button[type="submit"]');
+		const submitButtonMarkup = submitButton.innerHTML;
 		const whatsappInput = document.getElementById("whatsapp");
 		const durationInput = document.getElementById("lama-meminjam");
+
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			submitError.hidden = true;
+			submitButton.disabled = true;
+			submitButton.textContent = "Mengirim...";
+
+			try {
+				await fetch(scriptURL, {
+					method: "POST",
+					mode: "no-cors",
+					body: new URLSearchParams(new FormData(form))
+				});
+				form.hidden = true;
+				successCard.hidden = false;
+				successCard.focus();
+			} catch {
+				submitError.hidden = false;
+			} finally {
+				submitButton.disabled = false;
+				submitButton.innerHTML = submitButtonMarkup;
+			}
+		});
+
+		backBtn.addEventListener("click", () => {
+			form.reset();
+			whatsappInput.setCustomValidity("");
+			durationInput.setCustomValidity("");
+			successCard.hidden = true;
+			form.hidden = false;
+			form.scrollIntoView({ behavior: "smooth", block: "start" });
+		});
 
 		whatsappInput.addEventListener("input", () => {
 			whatsappInput.setCustomValidity(
