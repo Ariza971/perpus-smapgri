@@ -38,7 +38,7 @@ main {
 .eyebrow {
 	display: flex;
 	align-items: center;
-	gap: 9px;
+	gap: 11px;
 	margin: 0 0 12px;
 	color: var(--green);
 	font-size: 11px;
@@ -47,12 +47,11 @@ main {
 	text-transform: uppercase;
 }
 
-.eyebrow span {
-	width: 9px;
-	height: 12px;
-	border-radius: 2px 2px 1px 1px;
-	background: var(--accent);
-	box-shadow: 3px 0 0 #e7aa72;
+.school-logo {
+	width: 40px;
+	height: 48px;
+	flex: 0 0 auto;
+	object-fit: contain;
 }
 
 h1 {
