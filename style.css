@@ -33,24 +33,23 @@ main {
 
 .page-heading {
 	margin: 0 0 30px 8px;
+	text-align: center;
 }
 
 .eyebrow {
-	display: flex;
-	align-items: center;
-	gap: 11px;
 	margin: 0 0 12px;
 	color: var(--green);
-	font-size: 11px;
+	font-size: 14px;
 	font-weight: 700;
 	letter-spacing: 0.13em;
 	text-transform: uppercase;
 }
 
 .school-logo {
-	width: 40px;
-	height: 48px;
-	flex: 0 0 auto;
+	display: block;
+	width: 190px;
+	height: auto;
+	margin: 0 auto 12px;
 	object-fit: contain;
 }
 
@@ -175,7 +174,7 @@ button span {
 	}
 
 	.page-heading {
-		margin-left: 2px;
+		margin-left: 0;
 	}
 
 	.loan-form {
