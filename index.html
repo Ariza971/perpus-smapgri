@@ -38,11 +38,16 @@
 				</div>
 				<div class="field">
 					<label for="whatsapp">Nomor WhatsApp</label>
-					<input id="whatsapp" name="whatsapp" type="text" inputmode="numeric" autocomplete="tel" placeholder="Maksimal 15 digit" pattern="[0-9]{1,15}" maxlength="15" title="Masukkan angka saja, maksimal 15 digit" required>
+					<div class="phone-input">
+						<span class="phone-prefix" aria-hidden="true">+62</span>
+						<input id="whatsapp" name="whatsapp" type="text" inputmode="numeric" autocomplete="tel-national" placeholder="85xxxxxxxx" pattern="8[0-9]{7,12}" maxlength="13" title="Masukkan nomor setelah +62, mulai dengan 8 (contoh: 85xxxxxxxx)" required>
+					</div>
 				</div>
 				<div class="field">
 					<label for="judul-buku">Judul Buku</label>
-					<input id="judul-buku" name="judul_buku" type="text" placeholder="judul buku yang dipinjam" required>
+					<input id="judul-buku" name="judul_buku" type="text" list="daftar-judul-buku" placeholder="Ketik untuk mencari judul buku" autocomplete="off" required disabled>
+					<datalist id="daftar-judul-buku"></datalist>
+					<p id="status-daftar-buku" class="book-list-status" role="status" hidden></p>
 				</div>
 				<div class="field field-duration">
 					<label for="lama-meminjam">Lama Meminjam Buku <span>(hari)</span></label>
@@ -63,64 +68,6 @@
 			Terjadi kesalahan saat mengirim. Periksa koneksi internet lalu coba lagi.
 		</p>
 	</main>
-	<script>
-		const scriptURL = "https://script.google.com/macros/s/AKfycbyym-WvY93nk1QHeTlZZQ-1aK48CH1BMltTLlIIgLwmbaoDsfnE-YWG34KpkZjTY1X-/exec";
-		const form = document.getElementById("perpusForm");
-		const successCard = document.getElementById("successCard");
-		const backBtn = document.getElementById("backBtn");
-		const submitError = document.getElementById("submitError");
-		const submitButton = form.querySelector('button[type="submit"]');
-		const submitButtonMarkup = submitButton.innerHTML;
-		const whatsappInput = document.getElementById("whatsapp");
-		const durationInput = document.getElementById("lama-meminjam");
-
-		form.addEventListener("submit", async (event) => {
-			event.preventDefault();
-			submitError.hidden = true;
-			submitButton.disabled = true;
-			submitButton.textContent = "Mengirim...";
-
-			try {
-				await fetch(scriptURL, {
-					method: "POST",
-					mode: "no-cors",
-					body: new URLSearchParams(new FormData(form))
-				});
-				form.hidden = true;
-				successCard.hidden = false;
-				successCard.focus();
-			} catch {
-				submitError.hidden = false;
-			} finally {
-				submitButton.disabled = false;
-				submitButton.innerHTML = submitButtonMarkup;
-			}
-		});
-
-		backBtn.addEventListener("click", () => {
-			form.reset();
-			whatsappInput.setCustomValidity("");
-			durationInput.setCustomValidity("");
-			successCard.hidden = true;
-			form.hidden = false;
-			form.scrollIntoView({ behavior: "smooth", block: "start" });
-		});
-
-		whatsappInput.addEventListener("input", () => {
-			whatsappInput.setCustomValidity(
-				/^[0-9]{1,15}$/.test(whatsappInput.value)
-					? ""
-					: "Masukkan angka saja, maksimal 15 digit."
-			);
-		});
-
-		durationInput.addEventListener("input", () => {
-			durationInput.setCustomValidity(
-				/^[1-9][0-9]?$/.test(durationInput.value)
-					? ""
-					: "Masukkan jumlah hari dengan angka bulat dari 1 sampai 99."
-			);
-		});
-	</script>
+	<script src="script.js" defer></script>
 </body>
 </html>

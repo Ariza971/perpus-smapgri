@@ -113,8 +113,52 @@ h1 em {
 	transition: border-color 140ms ease, box-shadow 140ms ease;
 }
 
+.phone-input {
+	display: flex;
+	min-height: 46px;
+	border: 1px solid #cfd8ce;
+	border-radius: 3px;
+	background: #fff;
+	transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.phone-prefix {
+	display: flex;
+	align-items: center;
+	padding: 0 0 0 12px;
+	color: var(--muted);
+	font-size: 15px;
+}
+
+.phone-input input {
+	min-width: 0;
+	border: 0;
+	background: transparent;
+	box-shadow: none;
+}
+
+.phone-input:focus-within {
+	border-color: var(--green);
+	box-shadow: 0 0 0 3px rgb(36 86 67 / 14%);
+}
+
+.phone-input input:focus-visible {
+	border-color: transparent;
+	box-shadow: none;
+}
+
 .field input::placeholder {
 	color: #9aa49d;
+}
+
+.book-list-status {
+	margin: 6px 0 0;
+	color: var(--muted);
+	font-size: 12px;
+}
+
+.book-list-error {
+	color: #a12622;
 }
 
 .field input:focus-visible,
